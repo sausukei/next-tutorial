@@ -3,8 +3,8 @@ import { getAllPostIds, getPostData } from  '../../lib/posts';
 
 
 export default function Post({ postData }) {
-    return ( 
-      <Layout>
+  return (
+    <Layout>
       {postData.title}
       <br />
       {postData.id}
@@ -13,17 +13,7 @@ export default function Post({ postData }) {
       <br />
       <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
     </Layout>
-    );
-}
-
-export async function getStaticPaths() {
-    const paths = await getPostData(params.id);
-
-    return {
-        paths,
-        fallback: false,
-    };
-
+  );
 }
 
 export async function getStaticProps({ params }) {
@@ -35,4 +25,14 @@ export async function getStaticProps({ params }) {
       postData,
     },
   };
+}
+
+export async function getStaticPaths() {
+  const paths = getAllPostIds();
+
+  return {
+      paths,
+      fallback: false,
+  };
+
 }
